@@ -1,5 +1,5 @@
 // src/index.js
 
-const message = 'Hello world!';
+const message = "Hello world!";
 
 console.log(message);
