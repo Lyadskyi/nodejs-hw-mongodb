@@ -1,20 +1,17 @@
 import express from "express";
 import cors from "cors";
-import pino from "pino-http";
 
 import { env } from "./utils/env.js";
+
+import notFoundHandler from "./middlewares/notFoundHandler.js";
+import errorHandler from "./middlewares/errorHandler.js";
+import logger from "./middlewares/logger.js";
 
 import contactsRouter from "./routers/contacts.js";
 
 export const setupServer = () => {
   // 1.Функція створює веб-сервер
   const app = express();
-
-  const logger = pino({
-    transport: {
-      target: "pino-pretty",
-    },
-  });
 
   // 2.Функція прописує middlewares
   app.use(logger);
@@ -24,18 +21,9 @@ export const setupServer = () => {
   // Routes
   app.use("/contacts", contactsRouter);
 
-  app.use((req, res) => {
-    res.status(404).json({
-      message: `${req.url} not found`,
-    });
-  });
+  app.use(notFoundHandler);
 
-  app.use((error, req, res, next) => {
-    const { status = 500, message } = error;
-    res.status(status).json({
-      message,
-    });
-  });
+  app.use(errorHandler);
 
   const port = Number(env("PORT", 3000));
 
