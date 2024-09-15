@@ -12,6 +12,7 @@ const validateBody = (schema) => {
       next(validateError);
     }
   };
+
   return func;
 };
 
