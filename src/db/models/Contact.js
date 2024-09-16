@@ -2,15 +2,17 @@ import { Schema, model } from "mongoose";
 
 import { contactTypeList } from "../../constants/contacts.js";
 
+import { handleSaveError, setUpdateOptions } from "./hooks.js";
+
 const contactSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, "name must be exist"],
     },
     phoneNumber: {
       type: String,
-      required: true,
+      required: [true, "phoneNumber must be exist"],
     },
     email: {
       type: String,
@@ -23,11 +25,17 @@ const contactSchema = new Schema(
       type: String,
       default: "personal",
       enum: contactTypeList,
-      required: true,
+      required: [true, "contactType must be exist"],
     },
   },
   { versionKey: false, timestamps: true },
 );
+
+contactSchema.post("save", handleSaveError);
+
+contactSchema.pre("findOneAndUpdate", setUpdateOptions);
+
+contactSchema.post("findOneAndUpdate", handleSaveError);
 
 const ContactCollection = model("contact", contactSchema);
 

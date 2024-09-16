@@ -12,7 +12,7 @@ export const contactAddSchema = Joi.object({
     .required()
     .min(3)
     .max(20)
-    .messages({ "any.required": "phoneNumber must be specified" }),
+    .messages({ "any.required": "phoneNumber must be exist" }),
   email: Joi.string().min(3).max(20),
   isFavourite: Joi.boolean(),
   contactType: Joi.string()
@@ -20,7 +20,7 @@ export const contactAddSchema = Joi.object({
     .required()
     .min(3)
     .max(20)
-    .messages({ "any.required": "contactType must be specified" }),
+    .messages({ "any.required": "contactType must be exist" }),
 });
 
 export const contactPatchSchema = Joi.object({
