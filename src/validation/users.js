@@ -7,3 +7,8 @@ export const userRegisterSchema = Joi.object({
   email: Joi.string().pattern(email).required(),
   password: Joi.string().min(6).max(16).required(),
 });
+
+export const userLoginSchema = Joi.object({
+  email: Joi.string().pattern(email).required(),
+  password: Joi.string().min(6).max(16).required(),
+});
