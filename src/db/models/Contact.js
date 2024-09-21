@@ -8,11 +8,11 @@ const contactSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, "name must be exist"],
+      required: [true, "Name must be exist"],
     },
     phoneNumber: {
       type: String,
-      required: [true, "phoneNumber must be exist"],
+      required: [true, "PhoneNumber must be exist"],
     },
     email: {
       type: String,
@@ -25,7 +25,7 @@ const contactSchema = new Schema(
       type: String,
       default: "personal",
       enum: contactTypeList,
-      required: [true, "contactType must be exist"],
+      required: [true, "ContactType must be exist"],
     },
   },
   { versionKey: false, timestamps: true },
