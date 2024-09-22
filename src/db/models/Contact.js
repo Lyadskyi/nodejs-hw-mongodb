@@ -27,6 +27,11 @@ const contactSchema = new Schema(
       enum: contactTypeList,
       required: [true, "ContactType must be exist"],
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true },
 );
