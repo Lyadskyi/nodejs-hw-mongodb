@@ -8,6 +8,7 @@ import {
   deleteContactController,
 } from "../controllers/contacts.js";
 
+import authenticate from "../middlewares/authenticate.js";
 import isValidId from "../middlewares/isValidId.js";
 
 import ctrlWrapper from "../utils/ctrlWrapper.js";
@@ -19,6 +20,8 @@ import {
 } from "../validation/contacts.js";
 
 const contactsRouter = Router();
+
+contactsRouter.use(authenticate);
 
 contactsRouter.get("/", ctrlWrapper(getAllContactsController));
 
