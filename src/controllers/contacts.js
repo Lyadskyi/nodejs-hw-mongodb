@@ -10,17 +10,16 @@ import { sortFields } from "../constants/contacts.js";
 export const getAllContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams({ ...req.query, sortFields });
-  const { _id: userId } = req.user;
 
   const data = await contactServices.getContacts({
     page,
     perPage,
     sortBy,
     sortOrder,
-    userId,
+    userId: req.user._id,
   });
 
-  res.json({
+  res.status(200).json({
     status: 200,
     message: "Successfully found contacts!",
     data,
@@ -29,14 +28,13 @@ export const getAllContactsController = async (req, res) => {
 
 export const getContactByIdController = async (req, res) => {
   const { contactId } = req.params;
-  const { _id: userId } = req.user;
-  const data = await contactServices.getContact({ _id: contactId, userId });
+  const data = await contactServices.getContact(contactId, req.user._id);
 
   if (!data) {
     throw createHttpError(404, "Contact not found");
   }
 
-  res.json({
+  res.status(200).json({
     status: 200,
     message: `Successfully found contact with id ${contactId}!`,
     data,
@@ -66,7 +64,7 @@ export const patchContactController = async (req, res) => {
     throw createHttpError(404, "Contact not found");
   }
 
-  res.json({
+  res.status(200).json({
     status: 200,
     message: "Successfully patched a contact!",
     data: result.data,
