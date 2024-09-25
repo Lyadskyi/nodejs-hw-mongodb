@@ -1,6 +1,6 @@
 export const CONTACT_TYPE_LIST = ["work", "home", "personal"];
 
-export const SORT_FIELDS = [
+export const sortFields = [
   "_id",
   "name",
   "phoneNumber",

@@ -5,7 +5,7 @@ import * as contactServices from "../services/contacts.js";
 import parsePaginationParams from "../utils/parsePaginationParams.js";
 import parseSortParams from "../utils/parseSortParams.js";
 
-import { sortFields } from "../db/models/Contact.js";
+import { sortFields } from "../constants/contacts.js";
 
 export const getAllContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
