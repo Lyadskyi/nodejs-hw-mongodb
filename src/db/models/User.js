@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import { email } from "../../constants/users.js";
+import { EMAIL } from "../../constants/users.js";
 
 import { handleSaveError, setUpdateOptions } from "./hooks.js";
 
@@ -12,7 +12,7 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      match: email,
+      match: EMAIL,
       unique: true,
       required: true,
     },
