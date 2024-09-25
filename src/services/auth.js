@@ -5,11 +5,16 @@ import { randomBytes } from "crypto";
 import UserCollection from "../db/models/User.js";
 import SessionCollection from "../db/models/Session.js";
 
+import {
+  ACCESS_TOKEN_LIFE_TIME,
+  REFRESH_TOKEN_LIFE_TIME,
+} from "../constants/users.js";
+
 const createSession = () => {
   const accessToken = randomBytes(30).toString("base64");
   const refreshToken = randomBytes(30).toString("base64");
-  const accessTokenValidUntil = new Date(Date.now() + accessTokenLifeTime);
-  const refreshTokenValidUntil = new Date(Date.now() + refreshTokenLifeTime);
+  const accessTokenValidUntil = new Date(Date.now() + ACCESS_TOKEN_LIFE_TIME);
+  const refreshTokenValidUntil = new Date(Date.now() + REFRESH_TOKEN_LIFE_TIME);
 
   return {
     accessToken,
@@ -18,11 +23,6 @@ const createSession = () => {
     refreshTokenValidUntil,
   };
 };
-
-import {
-  accessTokenLifeTime,
-  refreshTokenLifeTime,
-} from "../constants/users.js";
 
 export const register = async (payload) => {
   const { email, password } = payload;

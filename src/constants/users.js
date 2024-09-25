@@ -1,5 +1,5 @@
-export const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const accessTokenLifeTime = 1000 * 60 * 15;
+export const ACCESS_TOKEN_LIFE_TIME = 1000 * 60 * 15; // 15 хвилин (мілісекунди * минуту * хвилини)
 
-export const refreshTokenLifeTime = 1000 * 60 * 60 * 24 * 30;
+export const REFRESH_TOKEN_LIFE_TIME = 1000 * 3600 * 24 * 30; // 30 днів (мілісекунди * (минуту * годину) * добу * дні)
