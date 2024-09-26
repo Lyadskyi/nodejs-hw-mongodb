@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import createHttpError from "http-errors";
+import jwt from "jsonwebtoken";
 import { randomBytes } from "crypto";
 
 import UserCollection from "../db/models/User.js";
@@ -9,6 +10,10 @@ import {
   ACCESS_TOKEN_LIFE_TIME,
   REFRESH_TOKEN_LIFE_TIME,
 } from "../constants/users.js";
+
+import { SMTP } from "../constants/index.js";
+import { env } from "../utils/env.js";
+import { sendEmail } from "../utils/sendMail.js";
 
 const createSession = () => {
   const accessToken = randomBytes(30).toString("base64");
@@ -102,3 +107,27 @@ export const logout = async (sessionId) => {
 };
 
 export const findUser = (filter) => UserCollection.findOne(filter);
+
+export const sendResetToken = async (email) => {
+  const user = await UserCollection.findOne({ email });
+  if (!user) {
+    throw createHttpError(404, "User not found");
+  }
+  const resetToken = jwt.sign(
+    {
+      sub: user._id,
+      email,
+    },
+    env("JWT_SECRET"),
+    {
+      expiresIn: "5m",
+    },
+  );
+
+  await sendEmail({
+    from: env(SMTP.SMTP_FROM),
+    to: email,
+    subject: "Reset your password",
+    html: `<p>Click <a href="${resetToken}">here</a> to reset your password!</p>`,
+  });
+};
