@@ -6,20 +6,17 @@ export const contactAddSchema = Joi.object({
   name: Joi.string()
     .required()
     .min(3)
-    .max(20)
     .messages({ "any.required": "name must be exist" }),
   phoneNumber: Joi.string()
     .required()
     .min(3)
-    .max(20)
     .messages({ "any.required": "phoneNumber must be exist" }),
-  email: Joi.string().min(3).max(20),
+  email: Joi.string().min(3),
   isFavourite: Joi.boolean(),
   contactType: Joi.string()
     .valid(...CONTACT_TYPE_LIST)
     .required()
     .min(3)
-    .max(20)
     .messages({ "any.required": "contactType must be exist" }),
 });
 
