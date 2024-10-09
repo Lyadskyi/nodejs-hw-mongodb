@@ -1,12 +1,6 @@
 import { Router } from "express";
 
-import {
-  getAllContactsController,
-  getContactByIdController,
-  addContactController,
-  patchContactController,
-  deleteContactController,
-} from "../controllers/contacts.js";
+import * as contactControllers from "../controllers/contacts.js";
 
 import authenticate from "../middlewares/authenticate.js";
 import isValidId from "../middlewares/isValidId.js";
@@ -24,19 +18,22 @@ const contactsRouter = Router();
 
 contactsRouter.use(authenticate);
 
-contactsRouter.get("/", ctrlWrapper(getAllContactsController));
+contactsRouter.get(
+  "/",
+  ctrlWrapper(contactControllers.getAllContactsController),
+);
 
 contactsRouter.get(
   "/:contactId",
   isValidId,
-  ctrlWrapper(getContactByIdController),
+  ctrlWrapper(contactControllers.getContactByIdController),
 );
 
 contactsRouter.post(
   "/",
   upload.single("photo"),
   validateBody(contactAddSchema),
-  ctrlWrapper(addContactController),
+  ctrlWrapper(contactControllers.addContactController),
 );
 
 contactsRouter.patch(
@@ -44,13 +41,13 @@ contactsRouter.patch(
   upload.single("photo"),
   isValidId,
   validateBody(contactPatchSchema),
-  ctrlWrapper(patchContactController),
+  ctrlWrapper(contactControllers.patchContactController),
 );
 
 contactsRouter.delete(
   "/:contactId",
   isValidId,
-  ctrlWrapper(deleteContactController),
+  ctrlWrapper(contactControllers.deleteContactController),
 );
 
 export default contactsRouter;

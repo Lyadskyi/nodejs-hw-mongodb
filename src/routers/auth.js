@@ -5,11 +5,11 @@ import * as authControllers from "../controllers/auth.js";
 import validateBody from "../utils/validateBody.js";
 import ctrlWrapper from "../utils/ctrlWrapper.js";
 
-import { userRegisterSchema, userLoginSchema } from "../validation/users.js";
 import {
   sendResetEmailSchema,
   resetPasswordSchema,
 } from "../validation/auth.js";
+import { userRegisterSchema, userLoginSchema } from "../validation/users.js";
 
 // import { resetPasswordController } from "../controllers/auth.js";
 
