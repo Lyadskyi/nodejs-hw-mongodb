@@ -10,6 +10,7 @@ import {
 
 import authenticate from "../middlewares/authenticate.js";
 import isValidId from "../middlewares/isValidId.js";
+import { upload } from "../middlewares/multer.js";
 
 import ctrlWrapper from "../utils/ctrlWrapper.js";
 import validateBody from "../utils/validateBody.js";
@@ -33,12 +34,14 @@ contactsRouter.get(
 
 contactsRouter.post(
   "/",
+  upload.single("photo"),
   validateBody(contactAddSchema),
   ctrlWrapper(addContactController),
 );
 
 contactsRouter.patch(
   "/:contactId",
+  upload.single("photo"),
   isValidId,
   validateBody(contactPatchSchema),
   ctrlWrapper(patchContactController),
