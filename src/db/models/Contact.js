@@ -23,13 +23,13 @@ const contactSchema = new Schema(
     },
     contactType: {
       type: String,
-      default: "personal",
       enum: CONTACT_TYPE_LIST,
+      default: "personal",
       required: [true, "ContactType must be exist"],
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: "users",
       required: true,
     },
     photo: { type: String },

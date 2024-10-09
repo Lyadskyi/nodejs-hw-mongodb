@@ -1,4 +1,4 @@
-export const CONTACT_TYPE_LIST = ["work", "home", "personal"];
+export const CONTACT_TYPE_LIST = ["home", "personal", "work"];
 
 export const sortFields = [
   "_id",
