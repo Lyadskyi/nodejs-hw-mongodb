@@ -11,8 +11,6 @@ import {
 } from "../validation/auth.js";
 import { userRegisterSchema, userLoginSchema } from "../validation/users.js";
 
-// import { resetPasswordController } from "../controllers/auth.js";
-
 const authRouter = Router();
 
 authRouter.post(

@@ -28,7 +28,7 @@ export const setupServer = () => {
   app.use("/contacts", contactsRouter);
   app.use("/uploads", express.static(UPLOAD_DIR));
 
-  app.use(notFoundHandler);
+  app.use("*", notFoundHandler);
 
   app.use(errorHandler);
 
