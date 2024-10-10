@@ -1,9 +1,9 @@
 import Joi from "joi";
 
-// import { EMAIL } from "../constants/users.js";
+import { EMAIL } from "../constants/users.js";
 
 export const sendResetEmailSchema = Joi.object({
-  email: Joi.string().email().required(),
+  email: Joi.string().pattern(EMAIL).required(),
 });
 
 export const resetPasswordSchema = Joi.object({

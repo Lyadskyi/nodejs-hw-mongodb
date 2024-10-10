@@ -32,7 +32,7 @@ const contactSchema = new Schema(
       ref: "users",
       required: true,
     },
-    photo: { type: String },
+    photo: { type: String }, // https://res.cloudinary.com/dpion3dps/image/upload/v1728579627/psidqyxeegrunxtevrkc.jpg
   },
   { versionKey: false, timestamps: true },
 );
