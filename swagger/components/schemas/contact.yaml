@@ -1,13 +1,12 @@
+# swagger/components/schemas/contact.yaml
+
 type: object
 required:
   - _id
   - name
   - phoneNumber
-  - email
-  - isFavourite
   - contactType
   - userId
-  - photo
 properties:
   _id:
     description: "Contact's id"
@@ -40,4 +39,4 @@ properties:
   photo:
     description: "Link to contact's photo"
     type: string
-    example: https://res.cloudinary.com/dpion3dps/image/upload/v1728579627/psidqyxeegrunxtevrkc.jpg
+    example: <https://res.cloudinary.com/dpion3dps/image/upload/v1728579627/psidqyxeegrunxtevrkc.jpg>

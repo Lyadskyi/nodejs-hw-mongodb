@@ -1,25 +1,24 @@
-#/swagger/paths/contacts/post.yaml
+#/swagger/paths/contacts/{id}/patch.yaml
 
 tags:
   - Contacts
-summary: Create contact
-operationId: createContact
-description: "Create a contact with payload"
+summary: Update contact by id
+operationId: patchContact
+description: "Update contact by id"
 security:
   - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: "65ca67e7ae7f10c88b598384"
 requestBody:
   content:
     multipart/form-data:
       schema:
         type: object
-        required:
-          - name
-          - phoneNumber
-          - email
-          - isFavourite
-          - contactType
-          - userId
-          - photo
         properties:
           name:
             description: "Contact's name"
@@ -41,17 +40,14 @@ requestBody:
             description: "Contact's type"
             type: string
             enum: ["home", "personal", "work"]
-          userId:
-            description: "Contact's user id"
-            type: string
-            example: 65e4decdd286b30065d54af9
           photo:
             description: "Link to contact's photo"
             type: string
-            example: binary
+            format: binary
+            example: <https://res.cloudinary.com/dpion3dps/image/upload/v1728579627/psidqyxeegrunxtevrkc.jpg>
 responses:
-  "201":
-    description: Creates a contact
+  "200":
+    description: "Update contact by id"
     content:
       application/json:
         schema:
@@ -63,12 +59,12 @@ responses:
           properties:
             status:
               type: integer
-              example: 201
+              example: 200
             message:
               type: string
-              example: Successfully created a contact!
+              example: Successfully update contact with id 65ca67e7ae7f10c88b598384!
             data:
               type: object
-              $ref: "../../components/schemas/contact.yaml"
-  "401":
-    $ref: "../../components/responses/401.yaml"
+              $ref: "../../../components/schemas/contact.yaml"
+  "404":
+    $ref: "../../../components/responses/404.yaml"
